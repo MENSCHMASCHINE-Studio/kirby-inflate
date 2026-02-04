@@ -24,8 +24,21 @@ Copy this repository into your pages plugin folder `site/plugins/inflate/`
 <?php endforeach;?>
 ```
 
-If the collection is as larger or larger than the requested size, it will not be modified or shrunken down.
-Unless configured otherwise it will only be active in environments where `debug = true`. 
+If the collection is as large or larger than the requested size, it will not be modified or shrunken down.
+
+As this is intended for development use only it will only be active in environments where `debug => true` unless configured otherwise. To activate inflation in environments where `debug = false` set:
+
+```php 
+// site/config.php
+
+return [
+    'debug' => false,
+    'MMS.inflate' => [
+        'inProduction' => true // Will activate inflation in non-debug environments
+    ]
+]
+
+```
 
 
 
