@@ -18,23 +18,34 @@ Copy this repository into your pages plugin folder `site/plugins/inflate/`
     <a href="<?=$article->url()?>"><?=$article->title()?></a>
 <?php endforeach;?>
 
-// Prevent repetive layouts by shuffling
+// Shuffle to prevent repetitive layouts
 <?php foreach ($page->children()->inflate(500, true) as $article): ?>
     <a href="<?=$article->url()?>"><?=$article->title()?></a>
 <?php endforeach;?>
+
+// With no arguments provided, inflate() will inflate to 50 items
+<?php foreach ($page->children()->inflate() as $article): ?>
+    <a href="<?=$article->url()?>"><?=$article->title()?></a>
+<?php endforeach;?>
+
 ```
 
 If the collection is as large or larger than the requested size, it will not be modified or shrunken down.
 
-As this is intended for development use only it will only be active in environments where `debug => true` unless configured otherwise. To activate inflation in environments where `debug = false` set:
+
+
+## Debug / Production
+As this is intended for development use only it will only be active in environments where `debug => true` unless configured otherwise. To activate `inflate()` in environments where `debug = false` set:
 
 ```php 
 // site/config.php
 
 return [
     'debug' => false,
+
+    // Will activate inflate() in non-debug environments
     'MMS.inflate' => [
-        'inProduction' => true // Will activate inflation in non-debug environments
+        'inProduction' => true 
     ]
 ]
 
